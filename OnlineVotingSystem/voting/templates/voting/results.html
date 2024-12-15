@@ -1,0 +1,60 @@
+{% extends 'voting/base.html' %}
+
+{% block content %}
+<h1>Results for {{ election.name }}</h1>
+
+<div class="results-container">
+    {% for candidate in candidates %}
+    <div class="candidate-result">
+        <h3>{{ candidate.name }}</h3>
+        <p>Votes: {{ candidate.vote_set.count }}</p> <!-- Displays the count of votes for each candidate -->
+    </div>
+    {% empty %}
+    <p>No candidates found for this election.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'election_list' %}" class="btn btn-primary">Back to Elections</a>
+{% endblock %}
+
+<style>
+    .results-container {
+        text-align: center;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .candidate-result {
+        margin: 1rem 0;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .candidate-result h3 {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .candidate-result p {
+        font-size: 1.2rem;
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+    .btn-primary:hover {
+        opacity: 0.8;
+    }
+</style>

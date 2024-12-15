@@ -1,0 +1,18 @@
+{% extends 'voting/base.html' %}
+{% block content %}
+<h1>Hi, {{user.username}}</h1>
+<ul>
+    {% for election in elections %}
+
+        <li>
+            <strong>{{ election.name }}</strong>
+            {% if election.can_vote %}
+                <p>This election is active, and you can vote!</p>
+                <a href="{% url 'vote' election.id %}">Go to Vote</a>
+            {% else %}
+                <p>You have already voted in this election.</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

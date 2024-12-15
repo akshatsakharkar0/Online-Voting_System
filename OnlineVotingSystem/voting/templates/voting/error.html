@@ -1,0 +1,51 @@
+{% extends 'voting/base.html' %}
+
+{% block content %}
+<div class="error-container">
+    <h1>Error</h1>
+    <p>You dont have permission to vote in this election</p>
+    <div class="error-actions">
+        <a href="{% url 'election_list' %}" class="btn btn-primary">Back to Elections</a>
+        <a href="{% url 'logout' %}" class="btn btn-secondary">Log Out</a>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Add some CSS for better styling -->
+<style>
+    .error-container {
+        text-align: center;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .error-container h1 {
+        color: #d9534f;
+    }
+    .error-container p {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+    .error-actions a {
+        margin: 0.5rem;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        color: white;
+        border-radius: 3px;
+        display: inline-block;
+    }
+    .btn-primary {
+        background-color: #007bff;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+        opacity: 0.8;
+    }
+</style>
