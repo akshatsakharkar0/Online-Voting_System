@@ -1,60 +1,23 @@
 {% extends 'voting/base.html' %}
 
 {% block content %}
-<h1>Results for {{ election.name }}</h1>
+<div class="min-h-screen bg-gray-100 flex flex-col items-center">
+    <h1 class="text-3xl font-bold text-gray-800 my-6">Results for {{ election.name }}</h1>
 
-<div class="results-container">
-    {% for candidate in candidates %}
-    <div class="candidate-result">
-        <h3>{{ candidate.name }}</h3>
-        <p>Votes: {{ candidate.vote_set.count }}</p> <!-- Displays the count of votes for each candidate -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl px-4">
+        {% for candidate in candidates %}
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-700 mb-2">{{ candidate.name }}</h3>
+            <p class="text-lg text-blue-500 font-semibold">Votes: {{ candidate.vote_set.count }}</p>
+        </div>
+        {% empty %}
+        <p class="text-center col-span-full text-gray-600">No candidates found for this election.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>No candidates found for this election.</p>
-    {% endfor %}
+
+    <a href="{% url 'election_list' %}"
+       class="mt-6 bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300">
+        Back to Elections
+    </a>
 </div>
-
-<a href="{% url 'election_list' %}" class="btn btn-primary">Back to Elections</a>
 {% endblock %}
-
-<style>
-    .results-container {
-        text-align: center;
-        padding: 2rem;
-        margin: 2rem auto;
-        max-width: 600px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .candidate-result {
-        margin: 1rem 0;
-        padding: 1rem;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .candidate-result h3 {
-        font-size: 1.5rem;
-        color: #333;
-    }
-
-    .candidate-result p {
-        font-size: 1.2rem;
-        color: #007bff;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: white;
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-        border-radius: 3px;
-        display: inline-block;
-    }
-
-    .btn-primary:hover {
-        opacity: 0.8;
-    }
-</style>

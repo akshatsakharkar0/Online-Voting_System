@@ -1,18 +1,22 @@
 {% extends 'voting/base.html' %}
 {% block content %}
-<h1>Hi, {{user.username}}</h1>
-<ul>
-    {% for election in elections %}
-
-        <li>
-            <strong>{{ election.name }}</strong>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Hi, {{ user.username }}</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for election in elections %}
+        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ election.name }}</h2>
             {% if election.can_vote %}
-                <p>This election is active, and you can vote!</p>
-                <a href="{% url 'vote' election.id %}">Go to Vote</a>
+                <p class="text-green-600 font-medium mb-4">This election is active, and you can vote!</p>
+                <a href="{% url 'vote' election.id %}"
+                   class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition duration-300">
+                    Go to Vote
+                </a>
             {% else %}
-                <p>You have already voted in this election.</p>
+                <p class="text-red-600 font-medium">You have already voted in this election.</p>
             {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
